@@ -21,14 +21,14 @@ export function TestimonialBlock({ block }: { block: TestimonialBlock }) {
 
   return (
     <figure className="relative bg-gray-100 rounded-lg border border-gray-200 overflow-hidden my-6">
-      <div className="grid grid-cols-1 md:grid-cols-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 h-[400px]">
         <div className="relative h-64 md:h-full col-span-1">
           <Image
             src={imageUrl}
             alt={block.photo.alternativeText || block.authorName}
             layout="fill"
             objectFit="cover"
-            className="w-full h-full object-center"
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="p-8 col-span-2 flex flex-col justify-center">

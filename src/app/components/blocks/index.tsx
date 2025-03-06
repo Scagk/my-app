@@ -14,7 +14,7 @@ const blocks: Record<
   "blocks.testimonial": ({ block }: { block: TeamPageBlock }) => (
     <TestimonialBlock block={block as TestimonialBlock} />
   ),
-  "blocks.rich-text": ({ block }: { block: TeamPageBlock }) => (
+  "blocks.richtext": ({ block }: { block: TeamPageBlock }) => (
     <RichTextBlock block={block as RichTextBlock} />
   ),
 };

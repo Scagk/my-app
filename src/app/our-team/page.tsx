@@ -1,30 +1,8 @@
 import qs from "qs";
 import Image from "next/image";
 import Link from "next/link";
+import { fetchApi } from "../utils/fetch";
 
-async function getTeamMembers() {
-  const baseUrl = "http://localhost:1337";
-  const path = "/api/team-members";
-
-  const url = new URL(path, baseUrl);
-
-  url.search = qs.stringify({
-    populate: {
-      photo: {
-        fields: ["alternativeText", "name", "url"],
-      },
-    },
-  });
-
-  const res = await fetch(url);
-
-  if (!res.ok) throw new Error("Failed to fetch team members");
-
-  const data = await res.json();
-  console.log(data);
-
-  return data;
-}
 
 interface TeamMemberProps {
   id: number;
@@ -51,11 +29,12 @@ function TeamMemberCard({
   photo,
   slug,
 }: Readonly<TeamMemberProps>) {
-  const imageUrl = `${"http://localhost:1337"
-  }${photo.url}`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337"
+    }${photo.url}`;
+    console.log("imageUrl", imageUrl);
   return (
     <Link
-      href={`/team-member/${slug}`}
+      href={`/our-team/${slug}`}
       className="bg-white rounded-lg shadow-md overflow-hidden"
     >
       <Image
@@ -72,8 +51,24 @@ function TeamMemberCard({
   );
 }
 
+async function getTeamMembers() {
+  const res = await fetchApi("/api/team-members", {}, {
+    photo: {
+      fields: ['alternativeText', 'name', 'url']
+    },
+  });
+  console.log("res", res);
+
+  if (res) {
+    if (res.status === 200) {
+      return res.data;
+    }
+  }
+  return res.data;
+}
+
 export default async function OurTeam() {
-  const teamMembers = await getTeamMembers();
+  const teamMembers: any = await getTeamMembers();
 
   return (
     <div>

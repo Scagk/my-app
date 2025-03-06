@@ -6,7 +6,7 @@ import {
 import Image from "next/image";
 
 export interface RichTextBlock {
-  __component: "blocks.rich-text";
+  __component: "blocks.richtext";
   id: number;
   content: BlocksContent;
 }

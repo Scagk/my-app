@@ -1,6 +1,6 @@
 import qs from "qs";
 
-import { BlockRenderer, TeamPageBlock } from "@/app/blocks";
+import { BlockRenderer, TeamPageBlock } from "@/app/components/blocks";
 
 async function getTeamMember(slug: string) {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
