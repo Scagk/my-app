@@ -1,6 +1,7 @@
 import qs from "qs";
 
 import { BlockRenderer, TeamPageBlock } from "@/app/components/blocks";
+import { promises } from "dns";
 
 async function getTeamMember(slug: string) {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:1337";
@@ -70,9 +71,9 @@ interface UserProfile {
 export default async function TeamMemberDetail({
   params,
 }: {
-  params: { slug: string };
+  params : Promise <{ slug: string }>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   if (!slug) return <p>No member found</p>;
 
